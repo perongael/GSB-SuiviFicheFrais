@@ -14,6 +14,10 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 
+ 
+ gggggg
+ 
+ 
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date('d/m/Y'));
 $numAnnee = substr($mois, 0, 4);
