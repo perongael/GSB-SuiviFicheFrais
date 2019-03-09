@@ -1,0 +1,171 @@
+<?php
+/**
+ * Index du projet GSB
+ *
+ * PHP Version 7
+ *
+ * @category  PPE
+ * @package   GSB
+ * @author    Réseau CERTA <contact@reseaucerta.org>
+ * @author    José GIL <jgil@ac-nice.fr>
+ * @copyright 2017 Réseau CERTA
+ * @license   Réseau CERTA
+ * @version   GIT: <0>
+ * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ */
+
+
+
+require_once 'includes/fct.inc.php';
+
+/* Cette ligne sert à inclure le fichier "fct.inc.php" se trouvant dans le dossier includes.
+  
+   Le fichier "fct.inc.php" contient différentes fonctions pour l'application.
+         
+   Un require_once a été choisi plutôt qu'un require car ainsi PHP vérifie si le fichier a déjà été inclus
+   et évite de l'inclure une deuxième fois.
+         
+   Un require_once a été choisi plutôt qu'un include car un require_once (et require) provoque une erreur
+   fatale lorqu'une erreur survient. Un include n'emet qu'une alerte et le script continu. */
+
+
+
+require_once 'includes/class.pdogsb.inc.php';  
+
+/* Cette ligne sert à inclure le fichier "class.pdogsb.inc.php" se trouvant dans le dossier includes.
+  
+   Le fichier "class.pdogsb.inc.php" contient différentes classes pour accéder aux données de la BBD.
+         
+   Un require_once a été choisi plutôt qu'un require car ainsi PHP vérifie si le fichier a déjà été inclus
+   et évite de l'inclure une deuxième fois.
+         
+   Un require_once a été choisi plutôt qu'un include car un require_once (et require) provoque une erreur
+   fatale lorqu'une erreur survient. Un include n'emet qu'une alerte et le script continu. */
+
+
+session_start();
+
+/* Cette fonction lance une nouvelle session de l'application */
+
+
+
+$pdo = PdoGsb::getPdoGsb();
+
+/* Cette ligne concerne la connexion à la base de donnée
+ * 
+ * Plus précisément, cette ligne va créer une instance de la classe PdoGsb et ainsi avoir accès 
+ * aux différentes fonction de cette classe 
+
+ * La classe Pdo permet de se lier avec la Base de donnée pour récupérer les informations ou en inscrire de nouvelles */
+
+
+
+$estConnecte = estConnecte();
+
+/* Cette ligne appel la fonction estConnecte() de la feuille fct.inc.php
+ * 
+ * Cette fonction teste si un visiteur est connecté et retourne vrai ou faux*/
+
+
+$_SESSION['chemin'] = filter_input(INPUT_GET, 'chemin', FILTER_SANITIZE_STRING); 
+ 
+require 'controleurs/c_entete.php';
+	
+
+/* Cette ligne sert à inclure le fichier "v_entete.php" se trouvant dans le dossier vues.
+  
+   Le fichier "v_entete.php" sert à organiser l'entête des différentes vues de l'application, il s'agit d'une présentation html       
+            
+   Un require_once a été choisi plutôt qu'un include car un require_once (et require) provoque une erreur
+   fatale lorqu'une erreur survient. Un include n'emet qu'une alerte et le script continu. */
+
+
+
+$uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+
+/* Cette ligne appel la fonction filter_input() 
+ * 
+ * Cette fonction permet de récupèrer une variable externe et de la filtrer, même en provenance de source non sécurisées
+ * comme les entrées utilisateurs par exemple.
+ *  
+ * "INPUT_GET" correspond au type d'entrée à vérifier (ici un INPUT_GET)
+ * 
+ * "uc" correspond à la variable à récupérer (ici la variable 'uc')
+ * 
+ * "FILTER_SANITIZE_STRING" correspond au filtrage appliqué à la variable (ici'uc'). Ici il s'agit du filte "FILTER_SANITIZE_STRING"
+ * qui permet de supprimer les balises (html par exemple), et de supprime ou d'encodee les caractères spéciaux.*/
+
+
+
+if ($uc && !$estConnecte) {
+    $uc = 'connexion';
+} elseif (empty($uc)) {
+    $uc = 'accueil';
+	$_SESSION['chemin'] = 'accueil';
+}
+
+/* Ce if permet de vérifier l'état actuel de la connexion et de modifier la variable $uc en fonction des cas.
+ * 
+ * Le if va tout d'abord regarder si la variable $uc est valide (pas de false) et si la variable $estConnecte est bien égal à false
+ * (! avant le $estConnecte). Cette condition nécessite donc d'avoir un $uc valide et un $estConnecte à false (donc pas connecté).
+ * Si les deux conditions sont valides ($uc valide et non connecté) alors la variable $uc est égale à 'connexion'.
+ * 
+ * Si l'une ou les deux des conditions ne sont pas remplies alors le elseif va être visé et sa condition testé.
+ * 
+ * Ici, le elseif va vérifier si la variable $uc est vide, (il faut également comprendre que si $uc est vide alors on peut penser que 
+ * $estConnecte est vrai car sinon le if aurait été validé).
+ * 
+ * Si c'est le cas, alors $uc sera égale à 'accueil', sinon $uc garde sa valeur précédente.  * 
+ * 
+ *  */
+
+
+
+switch ($uc) {   
+														/* Ici le switch va servir à comparer la variable (ici $uc) avec                  */
+case 'connexion':                                       /* différentes valeurs (connexion, accueil, gererFrais, etatFrais, deconnexion)   */
+    include 'controleurs/c_connexion.php';              
+    break;      
+		
+		/* Dès qu'une correspondance sera trouvé, la page php correspondante sera incluse */
+case 'accueil':
+    include 'controleurs/c_accueil.php';                /* Le break permet d'arreter l'éxecution des instructions, si il n'est pas ajouté */
+    break;    
+		
+		/* le programme continurai à lire les instructions suivantes*/
+case 'gererFrais':
+    include 'controleurs/c_gererFrais.php';
+    break;
+	
+	
+case 'etatFrais':
+    include 'controleurs/c_etatFrais.php';
+    break;
+
+	
+case 'validerFrais':
+    include 'controleurs/c_validerFrais.php';
+    break;	
+	
+
+	
+case 'voirFicheFrais':
+	include 'controleurs/c_voirFicheFrais.php';
+	break;		
+	
+case 'deconnexion':
+    include 'controleurs/c_deconnexion.php';
+    break;
+}
+
+
+
+
+require 'vues/v_pied.php';
+
+/* Cette ligne sert à inclure le fichier "v_pied.php" se trouvant dans le dossier vues.
+  
+   Le fichier "v_pied.php" sert à organiser le pied (bas de page) des différentes vues de l'application, il s'agit d'une présentation html       
+            
+   Un require_once a été choisi plutôt qu'un include car un require_once (et require) provoque une erreur
+   fatale lorqu'une erreur survient. Un include n'emet qu'une alerte et le script continu. */

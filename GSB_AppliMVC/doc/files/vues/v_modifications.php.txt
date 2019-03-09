@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion de l'accueil
+ * Vue Erreurs
  *
  * PHP Version 7
  *
@@ -13,23 +13,11 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
-
-if ($estConnecte) {
-	
-    if ($_SESSION['statut'] == 'visiteur') {
-	
-		include 'vues/v_accueilVisiteur.php';
-	
-	} 
-
-	if ($_SESSION['statut'] == 'comptable') {
-	
-		include 'vues/v_accueilComptable.php';
-	
-	} 		
-	
-} else {
-	
-    include 'vues/v_connexion.php';
-	
-}
+?>
+<div class="alert alert-success" role="alert">
+    <?php
+    foreach ($_REQUEST['modification'] as $modification) {
+        echo '<p>' . htmlspecialchars($modification) . '</p>';
+    }
+    ?>
+</div>

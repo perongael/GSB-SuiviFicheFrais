@@ -34,7 +34,7 @@ case 'saisirFrais':
 	
 case 'validerMajFraisForfait':
     $lesFrais = filter_input(INPUT_POST, 'lesFrais', FILTER_DEFAULT, FILTER_FORCE_ARRAY);
-	$puissance = filter_input(INPUT_POST, 'puissanceVehicule', FILTER_SANITIZE_STRING);
+	
 	if($_SESSION['statut'] == 'comptable'){
 		$idVisiteur = $_SESSION['idVisiteurChoisi'];
 		$mois = $_SESSION['leMoisChoisi'];		
@@ -42,8 +42,7 @@ case 'validerMajFraisForfait':
 	
     if (lesQteFraisValides($lesFrais)) {
         $pdo->majFraisForfait($idVisiteur, $mois, $lesFrais);
-		$pdo->majPuissanceVehicule($idVisiteur, $mois, $puissance);
-		ajouterModification('Les éléments ont étés mis à jour');
+		ajouterModification('Les éléments forfaitisés ont étés mis à jour');
         include 'vues/v_modifications.php';	
     } else {
         ajouterErreur('Les valeurs des frais doivent être numériques');
@@ -187,8 +186,6 @@ case 'majAJourNbJustificatifs':
 
 $lesFraisHorsForfait = $pdo->getLesFraisHorsForfait($idVisiteur, $mois);
 $lesFraisForfait = $pdo->getLesFraisForfait($idVisiteur, $mois);
-$puissanceVehicule = $pdo->getPuissanceVehicule($idVisiteur, $mois);
-$lstPuissanceVehicule = $pdo->getPuissanceAllVehicule();
 
 if($_SESSION['statut'] == 'comptable'){
 	
@@ -202,6 +199,7 @@ if($_SESSION['statut'] == 'comptable'){
 	require 'vues/v_listeFraisForfait.php';
 	require 'vues/v_listeFraisHorsForfait.php';	
 }
+
 
 
 

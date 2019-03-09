@@ -1,6 +1,6 @@
 <?php
 /**
- * Gestion de l'accueil
+ * Vue Déconnexion
  *
  * PHP Version 7
  *
@@ -13,23 +13,12 @@
  * @version   GIT: <0>
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
+deconnecter();
+?>
+<div class="alert alert-info" role="alert">
+    <p>Vous avez bien été déconnecté ! <a href="index.php">Cliquez ici</a>
+        pour revenir à la page de connexion.</p>
+</div>
+<?php
+header("Refresh: 3;URL=index.php");
 
-if ($estConnecte) {
-	
-    if ($_SESSION['statut'] == 'visiteur') {
-	
-		include 'vues/v_accueilVisiteur.php';
-	
-	} 
-
-	if ($_SESSION['statut'] == 'comptable') {
-	
-		include 'vues/v_accueilComptable.php';
-	
-	} 		
-	
-} else {
-	
-    include 'vues/v_connexion.php';
-	
-}
