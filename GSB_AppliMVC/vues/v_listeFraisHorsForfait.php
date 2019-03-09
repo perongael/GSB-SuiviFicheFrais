@@ -61,7 +61,7 @@
             <div class="form-group">
                 <label for="txtLibelleHF">Libellé</label>             
                 <input type="text" id="txtLibelleHF" name="libelle" 
-                       class="form-control" id="text">
+                       class="form-control" id="text" maxlength="90">
             </div> 
             <div class="form-group">
                 <label for="txtMontantHF">Montant : </label>

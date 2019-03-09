@@ -1,6 +1,6 @@
 <?php
 /**
- * Vue Pied de page
+ * Vue Erreurs
  *
  * PHP Version 7
  *
@@ -14,6 +14,10 @@
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
 ?>
-        </div>
-    </body>
-</html>
+<div class="alert alert-success" role="alert">
+    <?php
+    foreach ($_REQUEST['modification'] as $modification) {
+        echo '<p>' . htmlspecialchars($modification) . '</p>';
+    }
+    ?>
+</div>

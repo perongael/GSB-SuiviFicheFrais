@@ -36,8 +36,41 @@
                                size="10" maxlength="5" 
                                value="<?php echo $quantite ?>" 
                                class="form-control">
-                    </div>
+                    </div>					
                     <?php
+					
+					if ($idFrais == "KM")
+					{
+						?>
+						<div class="form-group">
+							<label for="idFrais">Puissance véhicule</label>
+							<select id="puissanceVehicule" name="puissanceVehicule" class="form-control">						
+							<?php
+							foreach ($lstPuissanceVehicule as $unePuissance) {
+								$idPuissance = $unePuissance['id'];
+								$nom = $unePuissance['designation'];								
+								if ($idPuissance == $puissanceVehicule['vehiculeutilise']) {
+									?>
+									<option selected="selected" value="<?php echo $idPuissance ?>">
+										<?php echo $nom ?> </option>
+									<?php
+								}
+								else 
+								{
+									?>
+									<option value="<?php echo $idPuissance ?>">
+										<?php echo $nom ?> </option>
+									<?php
+								}
+							}
+							?>												
+							</select>
+						</div>	
+						<?php
+						
+					}
+					
+					
                 }
                 ?>
                 <button class="btn btn-success" type="submit">Ajouter</button>
