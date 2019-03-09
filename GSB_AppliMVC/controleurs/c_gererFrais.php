@@ -15,8 +15,6 @@
  */
 
  
- gggggg
- 
  
 $idVisiteur = $_SESSION['idVisiteur'];
 $mois = getMois(date('d/m/Y'));
