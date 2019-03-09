@@ -96,6 +96,60 @@ function getMois($date)
     return $annee . $mois;
 }
 
+/**
+ * Retourne une date au format mois année selon une date au format aaaamm
+ *
+ * @param String $date au format aaaamm
+ *
+ * @return String Mois au format mois année en français
+ */
+function getDateComplete($date)
+{
+    $numAnnee = substr($date, 0, 4);	
+	$numMois = substr($date, 4, 2);	
+	$date = '01'.'/'.$numMois.'/'. $numAnnee;
+	$timestamp_datecreatefromformat = date_create_from_format('d/m/Y', $date);
+	$dateEnAnglais = date_format($timestamp_datecreatefromformat, "F Y");
+	$texte_en = array(
+		"January","February", "March", "April",
+		"May","June", "July", "August","September",
+		"October", "November", "December"
+	);
+	$texte_fr = array(
+    "Janvier","Fevrier", "Mars", "Avril", 
+	"Mai","Juin", "Juillet", "Aout", 
+	"Septembre","Octobre", "Novembre", "Decembre"
+	);
+	$dateEnFrancais = str_replace($texte_en,$texte_fr,$dateEnAnglais);	
+    return $dateEnFrancais;
+}
+
+
+/** 
+ * a remplir
+ */
+
+
+function traductionDateAngVersFr($date)
+{	
+	$texte_en = array(
+		"January","February", "March", "April",
+		"May","June", "July", "August","September",
+		"October", "November", "December"
+	);
+	$texte_fr = array(
+    "Janvier","Fevrier", "Mars", "Avril", 
+	"Mai","Juin", "Juillet", "Aout", 
+	"Septembre","Octobre", "Novembre", "Decembre"
+	);
+	$dateEnFrancais = str_replace($texte_en,$texte_fr,$date);	
+    return $dateEnFrancais;
+}
+
+
+
+
+
 /* gestion des erreurs */
 
 /**
@@ -234,6 +288,14 @@ function ajouterErreur($msg)
     $_REQUEST['erreurs'][] = $msg;
 }
 
+function ajouterModification($msg)
+{
+    if (!isset($_REQUEST['modification'])) {
+        $_REQUEST['modification'] = array();
+    }
+    $_REQUEST['modification'][] = $msg;
+}
+
 /**
  * Retoune le nombre de lignes du tableau des erreurs
  *
@@ -247,3 +309,11 @@ function nbErreurs()
         return count($_REQUEST['erreurs']);
     }
 }
+
+
+
+
+
+
+
+
