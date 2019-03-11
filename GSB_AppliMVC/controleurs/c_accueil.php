@@ -1,35 +1,28 @@
 <?php
+
 /**
- * Gestion de l'accueil
+ * Controleur pour orienter l'utilisateur en fonction de son statut
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
-
+ namespace gsb;
+// Test si l'utilisateur est connecté
 if ($estConnecte) {
-	
+// Si l'utilisateur est est un visiteur il redirige vers l'accueil visiteur
     if ($_SESSION['statut'] == 'visiteur') {
-	
-		include 'vues/v_accueilVisiteur.php';
-	
-	} 
-
-	if ($_SESSION['statut'] == 'comptable') {
-	
-		include 'vues/v_accueilComptable.php';
-	
-	} 		
-	
-} else {
-	
-    include 'vues/v_connexion.php';
-	
+        include 'vues/v_accueilVisiteur.php';
+    }
+// Si l'utilisateur est est un comptable il redirige vers l'accueil comptable
+    if ($_SESSION['statut'] == 'comptable') {
+        include 'vues/v_accueilComptable.php';
+    }
+// Si l'utilisateur n'est pas connecté redirection vers la page de connexion
+} else {	
+    include 'vues/v_connexion.php';	
 }
