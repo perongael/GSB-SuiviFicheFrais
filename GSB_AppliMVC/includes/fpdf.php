@@ -6,7 +6,7 @@
 * Date:    2015-11-29                                                          *
 * Author:  Olivier PLATHEY                                                     *
 *******************************************************************************/
-namespace gsb;
+
 define('FPDF_VERSION','1.8');
 
 class FPDF
