@@ -1,18 +1,16 @@
 <?php
 /**
- * Vue Liste des frais au forfait
+ * Affichage des frais forfaitaires avec possibilité de modification
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
 <div class="row">    
     <h2>Renseigner ma fiche de frais du mois 
@@ -28,7 +26,8 @@
                 foreach ($lesFraisForfait as $unFrais) {
                     $idFrais = $unFrais['idfrais'];
                     $libelle = htmlspecialchars($unFrais['libelle']);
-                    $quantite = $unFrais['quantite']; ?>
+                    $quantite = $unFrais['quantite'];
+                    ?>
                     <div class="form-group">
                         <label for="idFrais"><?php echo $libelle ?></label>
                         <input type="text" id="idFrais" 
@@ -38,41 +37,34 @@
                                class="form-control">
                     </div>					
                     <?php
-					
-					if ($idFrais == "KM")
-					{
-						?>
-						<div class="form-group">
-							<label for="idFrais">Puissance véhicule</label>
-							<select id="puissanceVehicule" name="puissanceVehicule" class="form-control">						
-							<?php
-							foreach ($lstPuissanceVehicule as $unePuissance) {
-								$idPuissance = $unePuissance['id'];
-								$nom = $unePuissance['designation'];								
-								if ($idPuissance == $puissanceVehicule['vehiculeutilise']) {
-									?>
-									<option selected="selected" value="<?php echo $idPuissance ?>">
-										<?php echo $nom ?> </option>
-									<?php
-								}
-								else 
-								{
-									?>
-									<option value="<?php echo $idPuissance ?>">
-										<?php echo $nom ?> </option>
-									<?php
-								}
-							}
-							?>												
-							</select>
-						</div>	
-						<?php
-						
-					}
-					
-					
-                }
-                ?>
+                    if ($idFrais == "KM") {
+                        ?>
+                        <div class="form-group">
+                            <label for="idFrais">Puissance véhicule</label>
+                            <select id="puissanceVehicule" name="puissanceVehicule" class="form-control">						
+                                <?php
+                                foreach ($lstPuissanceVehicule as $unePuissance) {
+                                    $idPuissance = $unePuissance['id'];
+                                    $nom = $unePuissance['designation'];
+                                    if ($idPuissance == $puissanceVehicule['vehiculeutilise']) {
+                                        ?>
+                                        <option selected="selected" value="<?php echo $idPuissance ?>">
+                                            <?php echo $nom ?> </option>
+                                            <?php
+                                    } else {
+                                        ?>
+                                        <option value="<?php echo $idPuissance ?>">
+                                        <?php echo $nom ?> </option>
+                                        <?php
+                                    }
+                                }
+                                ?>												
+                            </select>
+                        </div>	
+                                <?php
+                            }
+                        }
+                        ?>
                 <button class="btn btn-success" type="submit">Ajouter</button>
                 <button class="btn btn-danger" type="reset">Effacer</button>
             </fieldset>

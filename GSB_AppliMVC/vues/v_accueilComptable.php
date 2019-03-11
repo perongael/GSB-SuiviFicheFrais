@@ -1,25 +1,23 @@
 <?php
 /**
- * Vue Accueil Comptable
+ * Affichage de l'accueil pour un comptable
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Gaël Peron
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
 <div id="accueil">
     <h2>
         Gestion des frais<small> - Comptable : 
-            <?php 
-            echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']
-            ?></small>
+<?php
+echo $_SESSION['prenom'] . ' ' . $_SESSION['nom']
+?></small>
     </h2>
 </div>
 <div class="row">

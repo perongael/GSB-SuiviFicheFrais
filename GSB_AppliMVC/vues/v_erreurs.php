@@ -1,19 +1,19 @@
 <?php
+
 /**
- * Vue Erreurs
+ * Affichage d'une erreur
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
+
 <div class="alert alert-danger" role="alert">
     <?php
     foreach ($_REQUEST['erreurs'] as $erreur) {

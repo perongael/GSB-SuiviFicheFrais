@@ -1,18 +1,16 @@
 <?php
 /**
- * Vue Liste des frais hors forfait
+ * Affichage des frais hors forfait avec possibilité de modification
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
 <hr>
 <div class="row">
@@ -28,22 +26,23 @@
                 </tr>
             </thead>  
             <tbody>
-            <?php
-            foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
-                $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-                $date = $unFraisHorsForfait['date'];
-                $montant = $unFraisHorsForfait['montant'];
-                $id = $unFraisHorsForfait['id']; ?>           
-                <tr>
-                    <td> <?php echo $date ?></td>
-                    <td> <?php echo $libelle ?></td>
-                    <td><?php echo $montant ?></td>
-                    <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
-                           onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
-                </tr>
                 <?php
-            }
-            ?>
+                foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
+                    $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
+                    $date = $unFraisHorsForfait['date'];
+                    $montant = $unFraisHorsForfait['montant'];
+                    $id = $unFraisHorsForfait['id'];
+                    ?>           
+                    <tr>
+                        <td> <?php echo $date ?></td>
+                        <td> <?php echo $libelle ?></td>
+                        <td><?php echo $montant ?></td>
+                        <td><a href="index.php?uc=gererFrais&action=supprimerFrais&idFrais=<?php echo $id ?>" 
+                               onclick="return confirm('Voulez-vous vraiment supprimer ce frais?');">Supprimer ce frais</a></td>
+                    </tr>
+                    <?php
+                }
+                ?>
             </tbody>  
         </table>
     </div>

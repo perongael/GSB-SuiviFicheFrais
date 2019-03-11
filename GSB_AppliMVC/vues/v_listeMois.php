@@ -1,18 +1,16 @@
 <?php
 /**
- * Vue Liste des mois
+ * Affichage de la liste des mois pour selection par le visiteur
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
 <h2>Mes fiches de frais</h2>
 <div class="row">

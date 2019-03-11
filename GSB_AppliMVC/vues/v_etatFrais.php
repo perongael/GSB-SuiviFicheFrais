@@ -1,18 +1,16 @@
 <?php
 /**
- * Vue État de Frais
+ * Affichage des frais forfaitaires et hors forfait sans possibilité de modification
  *
  * PHP Version 7
  *
  * @category  PPE
- * @package   GSB
- * @author    Réseau CERTA <contact@reseaucerta.org>
- * @author    José GIL <jgil@ac-nice.fr>
- * @copyright 2017 Réseau CERTA
- * @license   Réseau CERTA
- * @version   GIT: <0>
- * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
+ * @package   GSB 
+ * @author    Peron Gaël
+ * @copyright 2018 - 2019 
+ * @link      http://www.php.net/manual/fr/book.pdo.php PHP Data Objects sur php.net
  */
+ namespace gsb;
 ?>
 <hr>
 <div class="panel panel-primary">
@@ -30,7 +28,8 @@
         <tr>
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
-                $libelle = $unFraisForfait['libelle']; ?>
+                $libelle = $unFraisForfait['libelle'];
+                ?>
                 <th> <?php echo htmlspecialchars($libelle) ?></th>
                 <?php
             }
@@ -39,7 +38,8 @@
         <tr>
             <?php
             foreach ($lesFraisForfait as $unFraisForfait) {
-                $quantite = $unFraisForfait['quantite']; ?>
+                $quantite = $unFraisForfait['quantite'];
+                ?>
                 <td class="qteForfait"><?php echo $quantite ?> </td>
                 <?php
             }
@@ -49,7 +49,7 @@
 </div>
 <div class="panel panel-info">
     <div class="panel-heading">Descriptif des éléments hors forfait - 
-        <?php echo $nbJustificatifs ?> justificatifs reçus</div>
+<?php echo $nbJustificatifs ?> justificatifs reçus</div>
     <table class="table table-bordered table-responsive">
         <tr>
             <th class="date">Date</th>
@@ -60,14 +60,15 @@
         foreach ($lesFraisHorsForfait as $unFraisHorsForfait) {
             $date = $unFraisHorsForfait['date'];
             $libelle = htmlspecialchars($unFraisHorsForfait['libelle']);
-            $montant = $unFraisHorsForfait['montant']; ?>
+            $montant = $unFraisHorsForfait['montant'];
+            ?>
             <tr>
                 <td><?php echo $date ?></td>
                 <td><?php echo $libelle ?></td>
                 <td><?php echo $montant ?></td>
             </tr>
-            <?php
-        }
-        ?>
+    <?php
+}
+?>
     </table>
 </div>
