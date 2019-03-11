@@ -10,14 +10,20 @@
  * @copyright 2018 - 2019 
  * @link      http://www.reseaucerta.org Contexte « Laboratoire GSB »
  */
- namespace gsb;
 require_once 'includes/fct.inc.php';
+
 require_once 'includes/class.pdogsb.inc.php';
+
 session_start();
+
 $pdo = PdoGsb::getPdoGsb();
+
 $estConnecte = estConnecte();
+
 $_SESSION['chemin'] = filter_input(INPUT_GET, 'chemin', FILTER_SANITIZE_STRING);
+
 $uc = filter_input(INPUT_GET, 'uc', FILTER_SANITIZE_STRING);
+
 if ($uc != 'imprimerFicheFrais' && $uc != 'connexion')
 {
 	require 'controleurs/c_entete.php';
